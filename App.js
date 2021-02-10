@@ -5,12 +5,12 @@ import DescriptionModal from './src/components/DescriptionModal'
 import Proposal from './src/components/Proposal'
 
 export default function App() {
-  const [isLoading, setLoading] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
-  const [data, setData] = useState([]);
-  const [selectedItem, setSelectedItem] = useState('');
+  const [isLoading, setLoading] = useState(false); //hook para verificar se os dados da API foram carregados
+  const [modalVisible, setModalVisible] = useState(false); //altera a visibilidade do modal de descrição
+  const [data, setData] = useState([]); //hook para salvar os dados encontrados na API
+  const [selectedItem, setSelectedItem] = useState(''); //hook para separar o item a ser exibido no modal
 
-  useEffect(() => {
+  useEffect(() => { //hook para buscar os dados. O useEffect é interessante, pois apenas busca os dados uma vez (não é executado ao renderizar novamente)
     fetch('https://my-json-server.typicode.com/codificar/oficina/proposals')
       .then((response) => response.json())
       .then((json) => setData(json))
@@ -23,9 +23,9 @@ export default function App() {
       {isLoading ? <ActivityIndicator /> : (
         <FlatList
           data={data}
-          keyExtractor={(item, index) => item.id.toString()}
+          keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
-            <Proposal
+            <Proposal 
               item={item}
               onPressItem={() => setModalVisible(!modalVisible)}
               showDescription={(item) => setSelectedItem(item)} />

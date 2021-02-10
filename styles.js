@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
         borderColor: '#33FF9C'
     },
 
-    itemModal: {
+    textModal: {
         fontSize: 25,
         textAlign: 'center'
     },
